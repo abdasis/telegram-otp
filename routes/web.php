@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,11 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/6780739692:AAFD6A6gCTuIDO51P57wYKaMUtVGxhpw4Tw/webhook', function () {
+    $update = Telegram::commandsHandler(true);
+    Log::info($update);
+});
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -36,3 +43,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
